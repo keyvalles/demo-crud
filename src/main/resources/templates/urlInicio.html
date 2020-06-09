@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <!-- Bootstrap CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:ref="@{/css/bootstrap.css}">
+</head>
+<body>
+    <div  class="container">
+        <br>
+        <div>
+            <a href="/save/null" class="btn btn-primary">Agregar Persona</a>
+        </div>
+        <div th:switch="${lista}"> <!-- lista es el atributo agregado en el model del controller, el switch evaluará la variable lista-->
+            <h2 th:case="null">No hay registros de Personas</h2> <!-- si la lista es vacía, se ejecuta este case y muestra mensaje-->
+            <div th:case="*">
+                <h2>Listado de Personas</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>direccion</th>
+                            <th>telefono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each = "persona : ${lista}">
+                            <td th:text="${persona.nombre}">
+                            <td th:text="${persona.apellidoP}">
+                            <td th:text="${persona.apellidoM}">
+                            <td th:text="${persona.direccion}">
+                            <td th:text="${persona.telefono}">
+                            <td><a th:href="@{/save/id (id=${persona.id})}">Editar</a></td>
+                            <td><a th:href="@{/eliminar/id (id=${persona.id})}">ELiminar</a></td>
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
